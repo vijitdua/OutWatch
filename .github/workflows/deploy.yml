@@ -54,7 +54,7 @@ jobs:
       # Load Docker image on server
       - name: Load Docker image on server
         run: |
-          sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} "docker load -i /home/out-watch/out-watch.tar"
+          sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} "sudo docker load -i /home/out-watch/out-watch.tar"
 
       # Stop and remove existing containers and images
       - name: Stop and remove existing containers and images
@@ -70,5 +70,5 @@ jobs:
         run: |
           sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} "
             cd /home/out-watch
-            docker-compose up -d
+            sudo docker-compose up -d
           "
