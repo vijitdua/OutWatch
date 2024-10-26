@@ -1,0 +1,96 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - production
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Build Docker image
+      - name: Build Docker image
+        run: docker build -t out-watch:latest .
+
+      # Save Docker image as a tar file
+      - name: Save Docker image as a tar file
+        run: docker save -o out-watch.tar out-watch:latest
+
+      # Remove existing files from the directory on server
+      - name: Remove existing files from directory on server
+        run: |
+          sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} "sudo rm -rf /home/out-watch/*"
+
+
+      # Copy Docker image and docker-compose.yml to SSH machine
+      - name: Copy files to SSH machine
+        uses: appleboy/scp-action@v0.1.1
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          source: |
+            out-watch.tar
+            docker-compose.yml
+          target: "/home/out-watch"
+
+      # Create .env file on server from GitHub Secrets
+      - name: Create .env file on server
+        uses: appleboy/ssh-action@v0.1.8
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          script: |
+            cat <<EOF > /home/out-watch/.env
+            CORS_ORIGIN=${{ secrets.CORS_ORIGIN }}
+            PORT=${{secrets.PORT}}
+            SERVER_LOCATION=${{secrets.SERVER_LOCATION}}
+            DATABASE=${{ secrets.DATABASE }}
+            DATABASE_HOST=${{ secrets.DATABASE_HOST }}
+            DATABASE_USER=${{ secrets.DATABASE_USER }}
+            DATABASE_PASSWORD=${{ secrets.DATABASE_PASSWORD }}
+            DISCORD_TOKEN=${{ secrets.DISCORD_TOKEN }}
+            DISCORD_OUTAGE_CHANNEL_ID=${{ secrets.DISCORD_OUTAGE_CHANNEL_ID }}
+            DISCORD_BUG_REPORT_CHANNEL_ID=${{ secrets.DISCORD_BUG_REPORT_CHANNEL_ID }}
+            DISCORD_GUILD_ID=${{ secrets.DISCORD_GUILD_ID }}
+            EOF
+
+      # Load Docker image on server
+      - name: Load Docker image on server
+        uses: appleboy/ssh-action@v0.1.8
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          script: |
+            docker load -i /home/out-watch/out-watch.tar
+
+      # Stop and remove existing containers and images
+      - name: Stop and remove existing containers and images
+        uses: appleboy/ssh-action@v0.1.8
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          script: |
+            cd /home/out-watch
+            sudo docker-compose down
+            sudo docker image rm out-watch:latest || true
+
+      # Start services using docker-compose
+      - name: Deploy to server
+        uses: appleboy/ssh-action@v0.1.8
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          script: |
+            cd /home/out-watch
+            docker-compose up -d

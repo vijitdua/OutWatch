@@ -8,12 +8,17 @@ const discordClient = new Client({
     ],
 });
 
-discordClient.login(env.discordBotToken).catch(error => {
-    console.error('Failed to login to Discord: ', error);
+
+const discordReady = new Promise((resolve, reject) => {
+    discordClient.once(Events.ClientReady, (readyClient) => {
+        console.log(`Discord bot ready! Logged in as ${readyClient.user.tag}`);
+        resolve();
+    });
+
+    discordClient.login(env.discordBotToken).catch((error) => {
+        console.error('Failed to login to Discord:', error);
+        reject(error);
+    });
 });
 
-discordClient.once(Events.ClientReady, async (readyClient) => {
-    console.log(`Discord bot ready! Logged in as ${readyClient.user.tag}`);
-});
-
-export default discordClient;
+export { discordClient, discordReady };

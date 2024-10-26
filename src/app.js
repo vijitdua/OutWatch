@@ -13,6 +13,7 @@ import ServiceUptime from "./models/serviceUptimeModel.js";
 import BugReport from "./models/bugReportModel.js";
 import {startCronJob} from "./scheduler.js";
 import {trackUptime} from "./service/serviceStatusService.js";
+import {discordReady} from "./config/discordClient.js";
 
 const app = express();
 app.use(globalRateLimit);
@@ -52,6 +53,7 @@ app.use('/api/status', statusRoutes);
         server.listen(env.port, () => {
             console.log(`Server is running on port ${env.port}`);
         });
+        await discordReady;
         await trackUptime();
         startCronJob();
     } catch (error) {

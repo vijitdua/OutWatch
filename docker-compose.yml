@@ -1,0 +1,32 @@
+services:
+  app:
+    build: .
+    restart: always
+    depends_on:
+      - db
+    ports:
+      - "3020:3000"
+    environment:
+      DATABASE_HOST: db
+      DATABASE_USER: ${DATABASE_USER}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      DATABASE: ${DATABASE}
+      DISCORD_TOKEN: ${DISCORD_TOKEN}
+      DISCORD_OUTAGE_CHANNEL_ID: ${DISCORD_OUTAGE_CHANNEL_ID}
+      DISCORD_BUG_REPORT_CHANNEL_ID: ${DISCORD_BUG_REPORT_CHANNEL_ID}
+      DISCORD_GUILD_ID: ${DISCORD_GUILD_ID}
+    env_file:
+      - .env
+
+  db:
+    image: postgres:14
+    restart: always
+    environment:
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: ${DATABASE}
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data:

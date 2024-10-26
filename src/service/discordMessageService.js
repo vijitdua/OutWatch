@@ -1,5 +1,5 @@
 import { env } from '../config/env.js';
-import discordClient from '../config/discordClient.js';
+import {discordClient} from '../config/discordClient.js';
 
 export async function sendStatusOfflineMessage(service) {
     try {
