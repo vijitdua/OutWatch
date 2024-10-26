@@ -1,0 +1,13 @@
+import cron from 'node-cron';
+import { trackUptime } from './service/serviceStatusService.js';
+import {sendStatusOfflineMessage} from "./service/discordMessageService.js";
+
+// Run every 10 minutes
+cron.schedule('*/10 * * * *', async () => {
+    try {
+        await trackUptime();
+    } catch (error) {
+        console.error('Error tracking uptime:', error);
+        await sendStatusOfflineMessage('OutWatch');
+    }
+});

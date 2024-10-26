@@ -1,0 +1,46 @@
+import { DataTypes } from 'sequelize';
+import { sequelize } from '../config/database.js';
+import ServiceUptime from "./serviceUptimeModel.js";
+import BugReport from "./bugReportModel.js";
+
+const Service = sequelize.define('Service', {
+    serviceId: {
+        type: DataTypes.UUID,
+        primaryKey: true,
+        defaultValue: DataTypes.UUIDV4,
+    },
+    serviceName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    type: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+            isIn: [['Frontend', 'Backend', 'Database']],
+        }
+    },
+    url: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+            isUrl: true,
+        }
+    },
+    status: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        defaultValue: 'unknown',
+        validate: {
+            isIn: [['up', 'down', 'unknown']],
+        }
+    },
+    lastChecked: {
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW,
+    },
+});
+
+Service.sync();
+
+export default Service;
