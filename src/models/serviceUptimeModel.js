@@ -1,15 +1,10 @@
 import { DataTypes } from 'sequelize';
 import { sequelize } from '../config/database.js';
-import Service from "./serviceModel.js";
 
 const ServiceUptime = sequelize.define('ServiceUptime', {
     serviceId: {
         type: DataTypes.UUID,
         allowNull: false,
-        references: {
-            model: Service,
-            key: 'serviceId',
-        },
     },
     timestamp: {
         type: DataTypes.DATE,
@@ -19,10 +14,13 @@ const ServiceUptime = sequelize.define('ServiceUptime', {
         type: DataTypes.STRING,
         allowNull: false,
     },
+}, {
+    indexes: [
+        {
+            fields: ['timestamp'],
+        },
+    ],
 });
 
-ServiceUptime.belongsTo(Service, { foreignKey: 'serviceId' });
-
-ServiceUptime.sync();
 
 export default ServiceUptime;

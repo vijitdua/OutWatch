@@ -3,7 +3,7 @@ import Service from '../models/serviceModel.js';
 export async function seedServices() {
     const services = [
         {
-            serviceName: 'InnoGreet Landing Page',
+            serviceName: 'InnoGreet (Landing Page)',
             type: 'Frontend',
             url: 'https://innogreet.com',
             status: 'unknown',

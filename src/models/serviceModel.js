@@ -1,7 +1,5 @@
 import { DataTypes } from 'sequelize';
 import { sequelize } from '../config/database.js';
-import ServiceUptime from "./serviceUptimeModel.js";
-import BugReport from "./bugReportModel.js";
 
 const Service = sequelize.define('Service', {
     serviceId: {
@@ -39,8 +37,10 @@ const Service = sequelize.define('Service', {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,
     },
+    downSince: {
+        type: DataTypes.DATE,
+        allowNull: true,
+    },
 });
-
-Service.sync();
 
 export default Service;

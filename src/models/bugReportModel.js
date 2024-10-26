@@ -11,10 +11,6 @@ const BugReport = sequelize.define('BugReport', {
     serviceId: {
         type: DataTypes.UUID,
         allowNull: false,
-        references: {
-            model: Service,
-            key: 'serviceId',
-        },
     },
     description: {
         type: DataTypes.TEXT,
@@ -29,9 +25,5 @@ const BugReport = sequelize.define('BugReport', {
         defaultValue: DataTypes.NOW,
     },
 });
-
-BugReport.belongsTo(Service, { foreignKey: 'serviceId' });
-
-BugReport.sync();
 
 export default BugReport;
