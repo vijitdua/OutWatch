@@ -1,6 +1,8 @@
 services:
   app:
-    build: .
+    image: out-watch:latest
+    build:
+      context: .             # Build context if image isn't found
     restart: always
     depends_on:
       - db
