@@ -1,5 +1,6 @@
 import { env } from '../config/env.js';
 import {discordClient} from '../config/discordClient.js';
+import Service from "../models/serviceModel.js";
 
 export async function sendStatusOfflineMessage(service) {
     try {
@@ -24,8 +25,11 @@ export async function sendStatusBackOnlineMessage(service) {
 
 export async function sendBugReportMessage(serviceId, description, email) {
     try {
+        const service = await Service.findByPk(serviceId);
+        const serviceName = service ? service.serviceName : 'Unknown Service';
+
         const channel = await discordClient.channels.fetch(env.discordBugReportChannelID);
-        const message = `🐞 New Bug Report for **Service ID: \`${serviceId}\`**\n**Reported by**: \`${email || 'Anonymous'}\`\n**Description**: ${description}`;
+        const message = `🐞 New Bug Report for **${serviceName}** (ID: \`${serviceId}\`)\n**Reported by**: \`${email || 'Anonymous'}\`\n**Description**: ${description}`;
         await channel.send(message);
     } catch (error) {
         console.log(`Error in sendBugReportMessage: ${error}`);
