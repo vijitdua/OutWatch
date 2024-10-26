@@ -12,7 +12,7 @@ export async function seedServices() {
         {
             serviceName: 'vijitdua.com - Home Website',
             type: 'Frontend',
-            url: 'https://vijitdua.com',
+            url: 'https://vijitdua.com/',
             status: 'unknown',
             lastChecked: new Date(),
         },

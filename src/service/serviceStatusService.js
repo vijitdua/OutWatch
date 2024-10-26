@@ -6,7 +6,7 @@ import { sendStatusBackOnlineMessage, sendStatusOfflineMessage } from './discord
 
 export async function checkServiceStatus(service) {
     try {
-        await axios.get(service.url);
+        await axios.get(service.url, { timeout: 10000 });
 
         if (service.status !== 'up') {
             // Service just came back up
