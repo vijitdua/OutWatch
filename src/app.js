@@ -18,7 +18,7 @@ import {discordReady} from "./config/discordClient.js";
 const app = express();
 app.use(globalRateLimit);
 
-const allowedOrigins = env.corsOrigin.split(',');
+// const allowedOrigins = env.corsOrigin.split(',');
 
 const corsOptions = {
     // origin: (origin, callback) => {
@@ -28,6 +28,7 @@ const corsOptions = {
     //         callback(new Error('Not allowed by CORS'));
     //     }
     // },
+    origin: '*',
     optionsSuccessStatus: 200
 };
 
