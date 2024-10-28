@@ -3,11 +3,10 @@ import Service from '../models/serviceModel.js';
 import ServiceUptime from '../models/serviceUptimeModel.js';
 import { Sequelize } from 'sequelize';
 import { sendStatusBackOnlineMessage, sendStatusOfflineMessage } from './discordMessageService.js';
-import {remap} from "../config/remapHosts.js";
 
 export async function checkServiceStatus(service) {
     try {
-        const url = remap[service.url] ? remap[service.url] : service.url;
+        const url = service.url;
         await axios.get(url, { timeout: 10000 });
         const updatedService = await Service.findByPk(service.serviceId);
         if (service.status !== 'up') {
