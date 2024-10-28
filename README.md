@@ -1,7 +1,3 @@
-Here's the revised README, maintaining the style and essence of the old one but updated with information from the new version:
-
----
-
 # OutWatch – Service Outage Monitor (Backend)
 
 > This is a backend only repository, frontend implementations can vary. An example implementation
