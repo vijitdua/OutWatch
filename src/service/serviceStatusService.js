@@ -9,17 +9,14 @@ export async function checkServiceStatus(service) {
     try {
         const url = remap[service.url] ? remap[service.url] : service.url;
         await axios.get(url, { timeout: 10000 });
-
+        const updatedService = await Service.findByPk(service.serviceId);
         if (service.status !== 'up') {
-            // Service just came back up
-            await Service.update(
-                { status: 'up', lastChecked: new Date(), downSince: null },
-                { where: { serviceId: service.serviceId } }
-            );
-            const updatedService = await Service.findByPk(service.serviceId);
             await sendStatusBackOnlineMessage(updatedService);
         }
-
+        await Service.update(
+            { status: 'up', lastChecked: new Date(), downSince: null },
+            { where: { serviceId: service.serviceId } }
+        );
         return 'up';
     } catch (error) {
         if (service.status !== 'down') {
