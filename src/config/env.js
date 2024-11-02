@@ -23,6 +23,7 @@ export const env = {
     discordOutageChannelID: process.env.DISCORD_OUTAGE_CHANNEL_ID,
     discordBugReportChannelID: process.env.DISCORD_BUG_REPORT_CHANNEL_ID,
     discordGuildID: process.env.DISCORD_GUILD_ID,
+    discordClientID: process.env.DISCORD_CLIENT_ID,
 
     rootLocation: projectRoot,
 }

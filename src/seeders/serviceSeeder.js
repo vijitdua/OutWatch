@@ -6,14 +6,14 @@ export async function seedServices() {
             serviceName: 'innogreet.com',
             type: 'Frontend',
             url: 'https://innogreet.com',
-            status: 'unknown',
+            status: 'up',
             lastChecked: new Date(),
         },
         {
             serviceName: 'vijitdua.com',
             type: 'Frontend',
             url: 'https://vijitdua.com',
-            status: 'unknown',
+            status: 'up',
             lastChecked: new Date(),
         },
     ];
