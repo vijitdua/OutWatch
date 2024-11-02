@@ -14,6 +14,7 @@ import BugReport from "./models/bugReportModel.js";
 import {startCronJob} from "./scheduler.js";
 import {trackUptime} from "./service/serviceStatusService.js";
 import {discordReady} from "./config/discordClient.js";
+import {sendBotOnlineAndReadyMessage} from "./service/discordMessageService.js";
 
 const app = express();
 app.use(globalRateLimit);
@@ -55,6 +56,7 @@ app.use('/api/status', statusRoutes);
             console.log(`Server is running on port ${env.port}`);
         });
         await discordReady;
+        await sendBotOnlineAndReadyMessage();
         await trackUptime();
         startCronJob();
     } catch (error) {
