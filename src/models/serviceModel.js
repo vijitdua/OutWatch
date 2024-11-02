@@ -41,6 +41,11 @@ const Service = sequelize.define('Service', {
         type: DataTypes.DATE,
         allowNull: true,
     },
+    private: { // New Field
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false, // If true service will be shown on discord but not on public get requests
+    },
 });
 
 export default Service;

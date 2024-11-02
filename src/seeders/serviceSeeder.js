@@ -8,6 +8,7 @@ export async function seedServices() {
             url: 'https://innogreet.com',
             status: 'up',
             lastChecked: new Date(),
+            private: false
         },
         {
             serviceName: 'vijitdua.com',
@@ -15,6 +16,15 @@ export async function seedServices() {
             url: 'https://vijitdua.com',
             status: 'up',
             lastChecked: new Date(),
+            private: false
+        },
+        {
+            serviceName: 'icarusalpha.com',
+            type: 'Frontend',
+            url: 'https://icarusalpha.com',
+            status: 'up',
+            lastChecked: new Date(),
+            private: true
         },
     ];
 

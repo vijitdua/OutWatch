@@ -24,14 +24,22 @@
 
 ## Overview
 
-OutWatch is a backend service designed for monitoring your application’s uptime and assisting with bug report management. It periodically checks service status, logs uptime data, and sends notifications to a Discord channel when a service is offline. User-submitted bug reports are also forwarded to Discord.
+OutWatch is a backend service designed for monitoring your application’s uptime and assisting with bug report
+management. It periodically checks service status, logs uptime data, and sends notifications to a Discord channel when a
+service is offline. User-submitted bug reports are also forwarded to Discord.
 
 ## Features
 
 - **Automated Uptime Tracking**: Regularly monitors service status every 10 minutes, logging results for analysis.
+  Accessible through discord and GET requests.
 - **Discord Notifications**: Alerts Discord channels for any downtime or submitted bug reports.
-- **User Bug Reporting**: Users can submit detailed bug reports, saved in the database and forwarded to a designated Discord channel.
+- **Discord Command**: Allows you to check the current service status through a discord command /service-status.
+- **User Bug Reporting**: Users can submit detailed bug reports, saved in the database and forwarded to a designated
+  Discord channel.
 - **Data Retention Policy**: Logs older than 7 days are automatically deleted, ensuring relevant, up-to-date data.
+- **Private & Public Services**: Allows you to have some services to be publicly displayable on any service tracking
+  webpage through GET requests, while allowing you to have some services that are private and only visible through the
+  discord client.
 
 ## Getting Started
 
@@ -57,6 +65,12 @@ OutWatch is a backend service designed for monitoring your application’s uptim
 
 1. **Environment Variables**:  
    Create a `.env` file in the root directory by cloning the `.env.sample` and fill it with appropriate data.
+2. **Service Visibility**  
+   Ensure `./src/seeders/serviceSeeder.js` is correctly configured to mark services as **private** or **public**, controlling their accessibility via Discord or publicly.
+
+    - This **public repository** includes some services marked as **private**. However, since the repo is public, these services (in my case) aren't truly private.
+    - To maintain privacy, ensure your configuration files aren't publicly accessible. The code alone won't, however, shouldn't expose your services.* 
+    - > **Personal Remark**: I marked certain services as private to prevent unnecessary spam on my [website](https://vijitdua.com/projects#status) while managing them within the same open-source repo for easy updates and deployment – these URL's being publicly visible isn't any issue beyond spam for me.
 
 ### Running the Application
 
@@ -71,7 +85,9 @@ The server should now be running on `http://localhost:3000`, with uptime checks 
 ## Usage
 
 Once up and running, OutWatch will:
-1. Perform periodic health checks on all configured services every 10 minutes, logging status updates and notifying a designated Discord channel if any service is offline.
+
+1. Perform periodic health checks on all configured services every 10 minutes, logging status updates and notifying a
+   designated Discord channel if any service is offline.
 2. Accept and store user-submitted bug reports, forwarding them to a specific Discord channel for real-time updates.
 
 ## API Endpoints
@@ -121,8 +137,10 @@ This project is licensed under the MIT License. See [LICENSE](LICENSE) for more 
 
 ### Notes
 
-OutWatch is designed to maintain up-to-date information, automatically deleting logs older than 7 days to keep data relevant.
+OutWatch is designed to maintain up-to-date information, automatically deleting logs older than 7 days to keep data
+relevant.
 
 ### *Disclaimer*:
 
-- README.md written by ChatGPT based on code and user prompt.
+- Parts of README.md written by ChatGPT based on code and user prompt.
+- *_subject to the code license_
