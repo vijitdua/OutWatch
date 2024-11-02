@@ -65,20 +65,12 @@ service is offline. User-submitted bug reports are also forwarded to Discord.
 
 1. **Environment Variables**:  
    Create a `.env` file in the root directory by cloning the `.env.sample` and fill it with appropriate data.
-2. **Service Seeing**:  
-   Ensure `./src/seeders/serviceSeeder.js` is set up correctly. Make relevant services private / public for
-   discord-only / public accessibility.
-   > - In this <ins>public repository</ins> I have some <ins>"private" services</ins>
-   > - However, do recall, that this repository is public. Meaning these services are not truly "private".
-   > - To ensure your services are private, make sure your configuration files are not public. Beyond that, the code
-       won't expose your services to the public.
-   > - (Irrelevant yapping) The specific case of this repository
-       >
-   - In my case, I don't mind making these private while technically still publicly visible in my source code.
-   >   - These files are only private to prevent un-necessary spam of services on
-         my [website](https://vijitdua.com/projects#status) that other people (besides me) don't care about.
-   >   - However, I still want to be able to easily update, modify, and deploy this file from the same open-source repo
-         without managing multiple repos. Hence here it is public.
+2. **Service Visibility**  
+   Ensure `./src/seeders/serviceSeeder.js` is correctly configured to mark services as **private** or **public**, controlling their accessibility via Discord or publicly.
+
+    - This **public repository** includes some services marked as **private**. However, since the repo is public, these services (in my case) aren't truly private.
+    - To maintain privacy, ensure your configuration files aren't publicly accessible. The code alone won't, however, shouldn't expose your services.* 
+    - > **Personal Remark**: I marked certain services as private to prevent unnecessary spam on my [website](https://vijitdua.com/projects#status) while managing them within the same open-source repo for easy updates and deployment – these URL's being publicly visible isn't any issue beyond spam for me.
 
 ### Running the Application
 
@@ -150,4 +142,5 @@ relevant.
 
 ### *Disclaimer*:
 
-- README.md written by ChatGPT based on code and user prompt.
+- Parts of README.md written by ChatGPT based on code and user prompt.
+- *_subject to the code license_
