@@ -18,6 +18,14 @@ export async function seedServices() {
             lastChecked: new Date(),
             private: false
         },
+        {
+            serviceName: 'icarusalpha.com',
+            type: 'Frontend',
+            url: 'https://icarusalpha.com',
+            status: 'up',
+            lastChecked: new Date(),
+            private: true
+        },
     ];
 
     try {
