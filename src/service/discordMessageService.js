@@ -27,9 +27,11 @@ export async function sendBotOnlineAndReadyMessage() {
     try {
         const channel = await discordClient.channels.fetch(env.discordOutageChannelID);
         const channel2 = await discordClient.channels.fetch(env.discordBugReportChannelID);
+        const channel3 = await discordClient.channels.fetch(env.discordMessageChannel);
         const message = ` ** 🔄Your discord bot restarted and is now online and ready.`;
         await channel.send(message);
         await channel2.send(message);
+        await channel3.send(message);
     } catch (error) {
         console.log(`Error in botJustCameOnline: ${error}`);
     }
