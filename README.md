@@ -111,15 +111,23 @@ Once up and running, OutWatch will:
 There are multiple ways to add services to OutWatch:
 
 1. **Database Insertion**: Manually insert entries in the `Service` table.
-2. **POST Endpoint**: Use the `/api/services` endpoint, providing `serviceName`, `type`, and `url`. Example payload:
-   ```json
-   {
-       "serviceName": "Backend API",
-       "type": "Backend",
-       "url": "https://api.example.com"
-   }
-   ```
-3. **Database Seeder**: Use the `seeders/serviceSeeder.js` to initialize predefined services.
+2. **Database Seeder**: Use the `seeders/serviceSeeder.js` to initialize predefined services.
+
+### Contact
+
+- **POST** `/api/contact`
+
+- **Description**: Sends a contact message to a designated Discord channel.
+- **Optional**: Don't set up the contactChannel in the ENV and this will not be enabled. Typically most users won't need this, I just added it for personal use and fun. (`FAFO :)`)
+
+**Request Body**:
+```json
+{
+  "name": "John Doe", // optional
+  "message": "This is a sample message", // required, string, <2000 characters
+  "contact": "johndoe@example.com" OR "discord: @vijitdua" OR "any string" // optional
+}
+```
 
 ## Technologies Used
 

@@ -49,6 +49,7 @@ jobs:
             DISCORD_BUG_REPORT_CHANNEL_ID=${{ secrets.DISCORD_BUG_REPORT_CHANNEL_ID }}
             DISCORD_GUILD_ID=${{ secrets.DISCORD_GUILD_ID }}
             DISCORD_CLIENT_ID=${{ secrets.DISCORD_CLIENT_ID }}
+            DISCORD_MESSAGE_CHANNEL=${{ secrets.DISCORD_MESSAGE_CHANNEL }}
             EOF
           "
 

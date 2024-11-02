@@ -24,6 +24,7 @@ export const env = {
     discordBugReportChannelID: process.env.DISCORD_BUG_REPORT_CHANNEL_ID,
     discordGuildID: process.env.DISCORD_GUILD_ID,
     discordClientId: process.env.DISCORD_CLIENT_ID,
+    discordMessageChannel: process.env.DISCORD_MESSAGE_CHANNEL || null,
 
     rootLocation: projectRoot,
 }

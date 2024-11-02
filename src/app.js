@@ -15,6 +15,7 @@ import {startCronJob} from "./scheduler.js";
 import {trackUptime} from "./service/serviceStatusService.js";
 import {discordReady} from "./config/discordClient.js";
 import {sendBotOnlineAndReadyMessage} from "./service/discordMessageService.js";
+import contactRoutes from "./routes/contactRoutes.js";
 
 const app = express();
 app.use(globalRateLimit);
@@ -41,6 +42,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use('/api/bug', bugRoutes);
 app.use('/api/status', statusRoutes);
+app.use('/api/contact', contactRoutes);
 
 
 (async () => {
