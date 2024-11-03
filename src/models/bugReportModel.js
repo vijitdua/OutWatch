@@ -1,5 +1,5 @@
-import { DataTypes } from 'sequelize';
-import { sequelize } from '../config/database.js';
+import {DataTypes} from 'sequelize';
+import {sequelize} from '../config/database.js';
 import Service from "./serviceModel.js";
 
 const BugReport = sequelize.define('BugReport', {
@@ -24,6 +24,16 @@ const BugReport = sequelize.define('BugReport', {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,
     },
+    discordMessageSent: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+    }
+}, {
+    indexes: [
+        {
+            fields: ['discordMessageSent']
+        }
+    ]
 });
 
 export default BugReport;

@@ -2,7 +2,7 @@ import { discordClient } from '../config/discordClient.js';
 import { env } from '../config/env.js';
 
 export async function sendContactMessage(req, res) {
-    const { name = 'Anonymous', message, contact = 'Anonymous' } = req.body;
+    const { name = '-', message, contact = '-' } = req.body;
 
     if (!message || typeof message !== 'string' || message.length >= 2000) {
         return res.status(400).json({ error: 'Invalid or missing message. Ensure it is under 2000 characters.' });
@@ -18,7 +18,7 @@ export async function sendContactMessage(req, res) {
 
     try {
         const channel = await discordClient.channels.fetch(env.discordMessageChannel);
-        const discordMessage = `📩 **New Message**\n**From**: ${name}\n\n**Contact Details**:\n${contact}\n**Message**:\n${message}\n---`;
+        const discordMessage = `📩 **New Message**\n**From**: \`${name}\`\n**Reply @**: \`${contact}\`\n**Content**:\n${message}\n---`;
         await channel.send(discordMessage);
 
         res.status(200).json({ message: 'Contact message sent successfully.' });
