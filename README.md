@@ -1,7 +1,7 @@
 # OutWatch – Service Outage Monitor (Backend)
 
 > This is a backend only repository, frontend implementations can vary. An example implementation
-> is [here](https://vijitdua.com/projects/#info) the repository of which can be
+> is [here](https://vijitdua.com/projects/#status) the repository of which can be
 > viewed [here](https://github.com/vijitdua/vijitdua.com)
 
 ## Table of Contents
