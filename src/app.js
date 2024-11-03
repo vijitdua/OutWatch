@@ -16,6 +16,7 @@ import {trackUptime} from "./service/serviceStatusService.js";
 import {discordReady} from "./config/discordClient.js";
 import {sendBotOnlineAndReadyMessage} from "./service/discordMessageService.js";
 import contactRoutes from "./routes/contactRoutes.js";
+import {sendPendingBugMessagesToDiscord} from "./service/bugReportService.js";
 
 const app = express();
 app.use(globalRateLimit);
@@ -60,6 +61,7 @@ app.use('/api/contact', contactRoutes);
         await discordReady;
         await sendBotOnlineAndReadyMessage();
         await trackUptime();
+        await sendPendingBugMessagesToDiscord();
         startCronJob();
     } catch (error) {
         console.error('Failed to start server:', error);
