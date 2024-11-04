@@ -25,8 +25,8 @@ export default {
 
             services.forEach(service => {
                 const statusEmoji = service.status === 'up' ? '🟢' : service.status === 'down' ? '🔴' : '⚪️';
-                const downSince = service.downSince ? new Date(service.downSince).toLocaleString() : 'N/A';
-                const lastChecked = new Date(service.lastChecked).toLocaleString();
+                const downSince = service.downSince ? `<t:${Math.floor(new Date(service.downSince).getTime() / 1000)}:f>` : 'N/A';
+                const lastChecked = `<t:${Math.floor(new Date(service.lastChecked).getTime() / 1000)}:f>`
                 let serviceInfo = `**Status**: ${service.status.toUpperCase()}`;
                 serviceInfo += service.downSince ? `\n**Down Since**: ${downSince}` : ``
                 serviceInfo += `\n**Last Checked**: ${lastChecked}`;
