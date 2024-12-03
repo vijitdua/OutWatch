@@ -12,6 +12,15 @@ export const authRateLimit = rateLimit({
     legacyHeaders: false,
 });
 
+export const messageRateLimit = rateLimit({
+    windowMs: 60 * 1000,
+    max: 5,
+    message: {
+        success: false,
+        message: 'Too many requests, please try again later'
+    }
+})
+
 // 100 requests per minute
 export const globalRateLimit = rateLimit({
     windowMs: 60 * 1000,
