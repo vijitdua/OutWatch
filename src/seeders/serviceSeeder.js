@@ -19,12 +19,12 @@ export async function seedServices() {
             private: false
         },
         {
-            serviceName: 'icarusalpha.com',
+            serviceName: 'launchdavis.com',
             type: 'Frontend',
-            url: 'https://icarusalpha.com',
+            url: 'launchdavis.com',
             status: 'up',
             lastChecked: new Date(),
-            private: true
+            private: false
         },
     ];
 
