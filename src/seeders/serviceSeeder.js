@@ -21,7 +21,7 @@ export async function seedServices() {
         {
             serviceName: 'launchdavis.com',
             type: 'Frontend',
-            url: 'launchdavis.com',
+            url: 'https://launchdavis.com',
             status: 'up',
             lastChecked: new Date(),
             private: false
