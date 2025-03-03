@@ -26,6 +26,14 @@ export async function seedServices() {
             lastChecked: new Date(),
             private: false
         },
+        {
+            serviceName: 'Is My Wifi On.com',
+            type: 'Frontend',
+            url: 'https://ismywifion.com',
+            status: 'up',
+            lastChecked: new Date(),
+            private: false
+        }
     ];
 
     try {
