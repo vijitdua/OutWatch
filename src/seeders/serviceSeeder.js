@@ -11,6 +11,14 @@ export async function seedServices() {
             private: false
         },
         {
+            serviceName: 'api.innogreet.com',
+            type: 'Backend',
+            url: 'https://api.innogreet.com',
+            status: 'up',
+            lastChecked: new Date(),
+            private: false
+        },
+        {
             serviceName: 'vijitdua.com',
             type: 'Frontend',
             url: 'https://vijitdua.com',
@@ -33,7 +41,7 @@ export async function seedServices() {
             status: 'up',
             lastChecked: new Date(),
             private: false
-        }
+        },
     ];
 
     try {
