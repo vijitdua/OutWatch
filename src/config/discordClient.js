@@ -6,10 +6,12 @@ import path from 'path';
 
 const __dirname = path.dirname(new URL(import.meta.url).pathname);
 
+const PREFIX = env.discordPrefix;
 const discordClient = new Client({
     intents: [
         GatewayIntentBits.Guilds,
         GatewayIntentBits.GuildMessages,
+        GatewayIntentBits.MessageContent,
     ],
 });
 
@@ -57,7 +59,7 @@ discordClient.once(Events.ClientReady, async (readyClient) => {
     await deployCommands();
 });
 
-// Event listener for handling interactions
+// Event listener for handling slash interactions
 discordClient.on(Events.InteractionCreate, async interaction => {
     if (!interaction.isCommand()) return;
 
@@ -88,6 +90,34 @@ discordClient.on(Events.InteractionCreate, async interaction => {
         } else {
             await interaction.reply({content: 'There was an error executing that command!', ephemeral: true});
         }
+    }
+});
+
+
+// Handle prefix-based commands
+discordClient.on(Events.MessageCreate, async message => {
+    if (message.author.bot || !message.content.startsWith(PREFIX)) return;
+
+    const args = message.content.slice(PREFIX.length).trim().split(/\s+/);
+    const commandName = args.shift().toLowerCase();
+    const commandsPath = path.join(__dirname, '../commands');
+    const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
+
+    try {
+        // Normalize file names (convert dashes to underscores, make lowercase)
+        const commandFile = commandFiles.find(file =>
+            file.split('.')[0].toLowerCase() === commandName
+        );
+
+        if (!commandFile) return;
+
+        const commandPath = path.join(commandsPath, commandFile);
+        const command = (await import(`file://${commandPath}`)).default;
+
+        await command.execute(message, args);
+    } catch (error) {
+        console.error(`Error executing prefix command ${commandName}:`, error);
+        await message.channel.send('An error occurred while executing this command.');
     }
 });
 

@@ -45,6 +45,7 @@ jobs:
             DATABASE_USER=${{ secrets.DATABASE_USER }}
             DATABASE_PASSWORD=${{ secrets.DATABASE_PASSWORD }}
             DISCORD_TOKEN=${{ secrets.DISCORD_TOKEN }}
+            DISCORD_PREFIX=${{secrets.DISCORD_PREFIX}}
             DISCORD_OUTAGE_CHANNEL_ID=${{ secrets.DISCORD_OUTAGE_CHANNEL_ID }}
             DISCORD_BUG_REPORT_CHANNEL_ID=${{ secrets.DISCORD_BUG_REPORT_CHANNEL_ID }}
             DISCORD_GUILD_ID=${{ secrets.DISCORD_GUILD_ID }}

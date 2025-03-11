@@ -19,6 +19,7 @@ export const env = {
     databaseUser: process.env.DATABASE_USER,
     databasePassword: process.env.DATABASE_PASSWORD,
 
+    discordPrefix: process.env.DISCORD_PREFIX || null,
     discordBotToken: process.env.DISCORD_TOKEN,
     discordOutageChannelID: process.env.DISCORD_OUTAGE_CHANNEL_ID,
     discordBugReportChannelID: process.env.DISCORD_BUG_REPORT_CHANNEL_ID,
