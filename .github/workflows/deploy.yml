@@ -36,7 +36,7 @@ jobs:
       - name: Create .env file on server
         run: |
           sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} "
-            cat <<EOF > /home/out-watch/.env
+            cat <<'EOF' > /home/out-watch/.env
             CORS_ORIGIN=${{ secrets.CORS_ORIGIN }}
             PORT=${{ secrets.PORT }}
             SERVER_LOCATION=${{ secrets.SERVER_LOCATION }}
@@ -52,7 +52,7 @@ jobs:
             DISCORD_CLIENT_ID=${{ secrets.DISCORD_CLIENT_ID }}
             DISCORD_MESSAGE_CHANNEL=${{ secrets.DISCORD_MESSAGE_CHANNEL }}
             DISCORD_ERROR_CHANNEL=${{secrets.DISCORD_ERROR_CHANNEL}}
-            EOF
+            'EOF'
           "
 
       # Remove existing image
