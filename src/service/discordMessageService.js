@@ -28,7 +28,7 @@ export async function sendStatusBackOnlineMessage(service) {
 export async function sendBotOnlineAndReadyMessage() {
     try {
         const channel = await discordClient.channels.fetch(env.discordOutageChannelID);
-        const message = ` ** 🔄Your discord bot restarted and is now online and ready.`;
+        const message = ` ** 🔄Your discord bot restarted and is now online and ready. Your command prefix is \`${env.discordPrefix}\` or you can use slash commands`;
         await channel.send(message);
     } catch (error) {
         console.log(`Error in botJustCameOnline: ${error}`);
