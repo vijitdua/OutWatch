@@ -3,22 +3,6 @@ import Service from '../models/serviceModel.js';
 export async function seedServices() {
     const services = [
         {
-            serviceName: 'innogreet.com',
-            type: 'Frontend',
-            url: 'https://innogreet.com',
-            status: 'up',
-            lastChecked: new Date(),
-            private: false
-        },
-        {
-            serviceName: 'api.innogreet.com',
-            type: 'Backend',
-            url: 'https://api.innogreet.com',
-            status: 'up',
-            lastChecked: new Date(),
-            private: false
-        },
-        {
             serviceName: 'vijitdua.com',
             type: 'Frontend',
             url: 'https://vijitdua.com',
@@ -27,17 +11,17 @@ export async function seedServices() {
             private: false
         },
         {
-            serviceName: 'launchdavis.com',
+            serviceName: 'Is My Wifi On.com',
             type: 'Frontend',
-            url: 'https://launchdavis.com',
+            url: 'https://ismywifion.com',
             status: 'up',
             lastChecked: new Date(),
             private: false
         },
         {
-            serviceName: 'Is My Wifi On.com',
+            serviceName: 'launchdavis.com',
             type: 'Frontend',
-            url: 'https://ismywifion.com',
+            url: 'https://launchdavis.com',
             status: 'up',
             lastChecked: new Date(),
             private: false
