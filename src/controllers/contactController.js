@@ -2,14 +2,10 @@ import { discordClient } from '../config/discordClient.js';
 import { env } from '../config/env.js';
 
 export async function sendContactMessage(req, res) {
-    const { name = '-', message, contact = '-' } = req.body;
+    const {message} = req.body;
 
     if (!message || typeof message !== 'string' || message.length >= 2000) {
         return res.status(400).json({ error: 'Invalid or missing message. Ensure it is under 2000 characters.' });
-    }
-
-    if (typeof contact !== 'string') {
-        return res.status(400).json({ error: 'Invalid contact information.' });
     }
 
     if (!env.discordMessageChannel) {
@@ -19,7 +15,7 @@ export async function sendContactMessage(req, res) {
     try {
         const channel = await discordClient.channels.fetch(env.discordMessageChannel);
         const discordMessage = `
-        **📩 New Anonymous Message**\n${message}\n-# You can send Vijit anonymous messages @ [vijitdua.com/message](<https://vijitdua.com/message>)\n---`;
+        **📩 New Anonymous Message**\n\n\n${message}\n\n\n-# You can send Vijit anonymous messages @ [vijitdua.com/message](<https://vijitdua.com/message>)\n---`;
         await channel.send(discordMessage);
 
         res.status(200).json({ message: 'Contact message sent successfully.' });
