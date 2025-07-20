@@ -27,6 +27,16 @@ jobs:
         run: |
           sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} "sudo rm -rf /home/out-watch/*"
 
+      - name: Prune Docker system on server
+        run: |
+          sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} "
+            echo 'Cleaning unused Docker data...'
+            sudo docker container prune -f
+            sudo docker image prune -af
+            sudo docker volume prune -f
+            sudo docker builder prune -af
+          "
+
       # Copy Docker image and docker-compose.yml to SSH machine
       - name: Copy files to SSH machine
         run: |
