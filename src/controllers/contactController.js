@@ -15,7 +15,7 @@ export async function sendContactMessage(req, res) {
     try {
         const channel = await discordClient.channels.fetch(env.discordMessageChannel);
         const discordMessage = `
-        **📩 New Anonymous Message**\n\n${message}\n\n-# You can send Vijit anonymous messages @ [vijitdua.com/message](<https://vijitdua.com/message>)\n---`;
+        **📩 New Anonymous Message**\n\n${message}\n\n-# Send anonymous messages @ [vijitdua.com/message](<https://vijitdua.com/message>)\n---`;
         await channel.send(discordMessage);
 
         res.status(200).json({ message: 'Contact message sent successfully.' });
